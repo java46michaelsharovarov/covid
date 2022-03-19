@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <style>
+        .textTableSize {
+            font-size: 0.7rem;
+        }
+        @media (min-width: 568px){
+            .textTableSize {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>    
+    <div class="container"> 
+        <nav class="row justify-content-center mt-2">
+            <button id="buttonContinents" onclick="showContinents()" class="col-5 col-sm-2 btn btn-secondary py-1 m-1">Continents Data</button> 
+            <button id="buttonCourses" onclick="showCourses()" class="col-5 col-sm-2 btn btn-secondary py-1 m-1">Confirmed Cases History Data</button>
+            <button id="buttonHoursStatistics" onclick="showHoursStatistics()" class="col-5 col-sm-2 btn btn-secondary py-1 m-1">Death Cases History Data</button> 
+            <button id="buttonCostStatistics" onclick="showCostStatistics()" class="col-5 col-sm-2 btn btn-secondary py-1 m-1">Vaccine Data </button></nav>
+        <div id="spinner" class="position-absolute top-0 start-0 vw-100 vh-100 bg-dark bg-opacity-25" hidden></div>        
+        <!-- <div class="row justify-content-center">
+            <div id="alert" class="col-sm-8 col-lg-4"></div>
+        </div>
+        <form id="courses-form" hidden>           
+                <div class="row justify-content-center mt-lg-5">
+                    <div class="col-sm-4 mt-5 mt-sm-3 mt-lg-5">
+                        <select class="form-select" name="name" id="name-options" required>
+                            <option value disabled selected hidden>--Select course name--</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-4 mt-5 mt-sm-3 mt-lg-5">
+                        <select class="form-select" name="lecturer" id="lecturer-options" required>
+                            <option value disabled selected hidden>--Select lecturer name--</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-sm-4 mt-5 mt-sm-3 mt-lg-5">
+                        <label for="" class="form-label m-0">Hours</label>
+                        <input class="form-control mt-1 mt-sm-0" type="number" name="hours" required>
+                    </div>
+                    <div class="col-sm-4 mt-5 mt-sm-3 mt-lg-5">
+                        <label for="" class="form-label m-0">Cost</label>
+                        <input class="form-control mt-1 mt-sm-0" type="number" name="cost" required>    
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-sm-4 mt-5 mt-sm-3 mt-lg-5">
+                        <label for="" class="form-label m-0">Open Date</label>
+                        <input class="form-control mt-1 mt-sm-0" type="date" name="openingDate" placeholder="opening date" required>
+                    </div>
+                </div>
+                <div class="row justify-content-around mt-5 mt-sm-3 mt-lg-5">
+                    <button type="submit" class="col-4 btn btn-outline-primary">Submit</button>
+                    <button type="reset" onclick="hideAlertMessage();" class="col-4 btn btn-outline-secondary">Reset</button>
+                </div>
+        </form>
+        <form id="generation-courses-form" hidden>       
+            <div class="row justify-content-center mt-5">
+                <div class="col-sm-4 mt-5 mt-sm-3 mt-lg-5">
+                    <label for="" class="form-label">Courses</label>
+                    <input class="form-control mt-1 mt-sm-0" type="number" name="courses" required>
+                </div>
+            </div>
+            <div class="row justify-content-around mt-5">
+                <button type="submit" class="col-4 btn btn-outline-primary">Submit</button>
+                <button type="reset" onclick="hideAlertMessage();" class="col-4 btn btn-outline-secondary">Reset</button>
+            </div>
+        </form> -->
+        <div>
+            <table class="table table-responsive align-middle text-center textTableSize mt-3 mt-sm-0 mt-lg-3" id="table"></table>    
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+        <script src="dist/bundle.js"></script>
+</body>
+</html>
