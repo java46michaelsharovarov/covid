@@ -22,59 +22,30 @@
     <div class="container"> 
         <nav class="row justify-content-center mt-2">
             <button id="buttonContinents" onclick="showContinents()" class="col-5 col-sm-2 btn btn-secondary py-1 m-1">Continents Data</button> 
-            <button id="buttonCourses" onclick="showCourses()" class="col-5 col-sm-2 btn btn-secondary py-1 m-1">Confirmed Cases History Data</button>
-            <button id="buttonHoursStatistics" onclick="showHoursStatistics()" class="col-5 col-sm-2 btn btn-secondary py-1 m-1">Death Cases History Data</button> 
-            <button id="buttonCostStatistics" onclick="showCostStatistics()" class="col-5 col-sm-2 btn btn-secondary py-1 m-1">Vaccine Data </button></nav>
+            <button id="buttonInterval" onclick="showInterval()" class="col-5 col-sm-2 btn btn-secondary py-1 m-1">Confirmed Cases History Data</button>
+            <button id="" onclick="" class="col-5 col-sm-2 btn btn-secondary py-1 m-1">Death Cases History Data</button> 
+            <button id="" onclick="" class="col-5 col-sm-2 btn btn-secondary py-1 m-1">Vaccine Data </button></nav>
         <div id="spinner" class="position-absolute top-0 start-0 vw-100 vh-100 bg-dark bg-opacity-25" hidden></div>        
-        <!-- <div class="row justify-content-center">
+        <div class="row justify-content-center">
             <div id="alert" class="col-sm-8 col-lg-4"></div>
         </div>
-        <form id="courses-form" hidden>           
+        <form id="interval-form" hidden>           
                 <div class="row justify-content-center mt-lg-5">
                     <div class="col-sm-4 mt-5 mt-sm-3 mt-lg-5">
-                        <select class="form-select" name="name" id="name-options" required>
-                            <option value disabled selected hidden>--Select course name--</option>
+                        <select class="form-select" name="country" id="country-options" required>
+                            <option value disabled selected hidden>--Select country--</option>
                         </select>
                     </div>
                     <div class="col-sm-4 mt-5 mt-sm-3 mt-lg-5">
-                        <select class="form-select" name="lecturer" id="lecturer-options" required>
-                            <option value disabled selected hidden>--Select lecturer name--</option>
+                        <select class="form-select" name="interval" id="interval-options" required>
+                            <option value disabled selected hidden>--Select interval--</option>
                         </select>
-                    </div>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-sm-4 mt-5 mt-sm-3 mt-lg-5">
-                        <label for="" class="form-label m-0">Hours</label>
-                        <input class="form-control mt-1 mt-sm-0" type="number" name="hours" required>
-                    </div>
-                    <div class="col-sm-4 mt-5 mt-sm-3 mt-lg-5">
-                        <label for="" class="form-label m-0">Cost</label>
-                        <input class="form-control mt-1 mt-sm-0" type="number" name="cost" required>    
-                    </div>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-sm-4 mt-5 mt-sm-3 mt-lg-5">
-                        <label for="" class="form-label m-0">Open Date</label>
-                        <input class="form-control mt-1 mt-sm-0" type="date" name="openingDate" placeholder="opening date" required>
                     </div>
                 </div>
                 <div class="row justify-content-around mt-5 mt-sm-3 mt-lg-5">
                     <button type="submit" class="col-4 btn btn-outline-primary">Submit</button>
-                    <button type="reset" onclick="hideAlertMessage();" class="col-4 btn btn-outline-secondary">Reset</button>
                 </div>
         </form>
-        <form id="generation-courses-form" hidden>       
-            <div class="row justify-content-center mt-5">
-                <div class="col-sm-4 mt-5 mt-sm-3 mt-lg-5">
-                    <label for="" class="form-label">Courses</label>
-                    <input class="form-control mt-1 mt-sm-0" type="number" name="courses" required>
-                </div>
-            </div>
-            <div class="row justify-content-around mt-5">
-                <button type="submit" class="col-4 btn btn-outline-primary">Submit</button>
-                <button type="reset" onclick="hideAlertMessage();" class="col-4 btn btn-outline-secondary">Reset</button>
-            </div>
-        </form> -->
         <div>
             <table class="table table-responsive align-middle text-center textTableSize mt-3 mt-sm-0 mt-lg-3" id="table"></table>    
         </div>

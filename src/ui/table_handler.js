@@ -2,10 +2,10 @@ export default class TableHandler {
     #tableName
     #tableElem
     #columnsDefinition
-    constructor(columnsDefinition, idTable, tableName) {
+    constructor(columnsDefinition, tableId, tableName) {
         this.#tableName = tableName ?? '';
         this.#columnsDefinition = columnsDefinition;
-        this.#tableElem = document.getElementById(idTable);
+        this.#tableElem = document.getElementById(tableId);
         if (!this.#tableElem) {
             throw "Table element is not defined";
         }
