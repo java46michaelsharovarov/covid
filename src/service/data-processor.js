@@ -1,15 +1,19 @@
+import _ from "lodash";
+
 export default class Processor {
     #dataProvider
     constructor(dataProvider) {
         this.#dataProvider = dataProvider;
-    }    
-    async getCountrysList() {
-        const countryList = await this.#dataProvider.getContinentCases();
-        const res = Object.keys(countryList);
-        return res;
-     }
+    } 
+    async getCountriesList() {
+        const data = await await this.#dataProvider.getCases();
+        const countryList = Object.keys(data);
+        return countryList;
+    }
     async getAllContinents() {
-        const continentCases = await this.#dataProvider.getContinentCases();
+        const cases = await this.#dataProvider.getCases();
+        const continentData = Object.values(cases).map(o => o.All).filter(c => !!c.continent && !!c.population); 
+        const continentCases = _.groupBy(continentData, 'continent');
         const res = Object.values(continentCases).map(e => {
             return {
                 continent: e[0].continent,
@@ -20,22 +24,62 @@ export default class Processor {
         })
         return res;        
     }
-    #getPercentCasesByKey(continent, key) {
-        return _.round(this.#getContinentCasesByKey(continent, key) / this.#getContinentPopulation(continent) * 100, 2);
+    #getPercentCasesByKey(data, key) {
+        return _.round(this.#getContinentCasesByKey(data, key) / this.#getContinentPopulation(data) * 100, 2);
     }
-    #getContinentPopulation(continent) {
-        return _.sumBy(continent, 'population');
+    #getContinentPopulation(data) {
+        return _.sumBy(data, 'population');
     }
-    #getContinentCasesByKey(continent, key) {
-        return _.sumBy(continent, key)
+    #getContinentCasesByKey(data, key) {
+        return _.sumBy(data, key)
     }
-    #getDateUpdate(continent) {
+    #getDateUpdate(data) {
         let date = 'no date';
-        for(let country of continent) {
-            if(country.updated) {
-                date = country.updated
+        for(let obj of data) {
+            if(obj.updated) {
+                date = obj.updated
             }
         }
         return date;
+    }
+    async getCasesByInterval(status, countryAndInterval) {
+        const data = await this.#dataProvider.getHistory(countryAndInterval.country, status);
+        const datesData = Object.entries(data.All.dates);
+        const interval = +countryAndInterval.interval;
+        countryAndInterval.status = _.capitalize(status);
+        const res = [];
+        for(let i = 0; i < datesData.length; i += interval) {
+            let j = i+interval;
+            if(j > datesData.length){
+                j = datesData.length - 1;
+            }
+            const obj = {
+                dateFrom: datesData[j][0],
+                dateTo: datesData[i][0],
+                cases: datesData[i][1] - datesData[j][1]
+            }
+            res.push(obj);
+        }
+        return res;
+    }
+    async getPercentVaccinated(countries) {
+        const vaccin = await this.#dataProvider.getVaccin();
+        const vaccinData = Object.values(vaccin).map(o => o.All);
+        const selectedCountries = vaccinData.filter(e => {
+            let res = false;
+            countries.forEach(element => res = element === e.country && !!e.population || res);
+            return res;
+        }); 
+        const res = selectedCountries.map(e => {
+            return {
+                country: e.country,
+                percent: _.round(e.people_vaccinated / e.population * 100, 2),
+                date: e.updated.substring(0, 10) || 'no date'
+            }
+        })
+        return res;
+    }
+    async sortData(data, key) {
+        return _.sortBy(await data, key);
     }
 }

@@ -12,8 +12,20 @@ export default class FormHandler {
                 obj[element.name] = element.value;
                 return obj;
             }, {})
+            await fnProcessor(data);
             this.#formElement.reset();
-        });
+        }, true);
+    }
+    removeHandler(fnProcessor) {
+        this.#formElement.removeEventListener('submit', async event => {
+            event.preventDefault();
+            const data = Array.from(this.#inputElements).reduce((obj, element) => {
+                obj[element.name] = element.value;
+                return obj;
+            }, {})
+            await fnProcessor(data);
+            this.#formElement.reset();
+        }, true);
     }
     fillOptions(idOptions, options) {
         document.getElementById(idOptions).innerHTML += `${getOptions(options)}`;

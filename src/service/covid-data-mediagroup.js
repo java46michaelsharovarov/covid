@@ -1,25 +1,28 @@
 import _ from "lodash";
 
 export default class CovidDataMediaGroup {
-    #baseUrl
-    #continentCasesData
+    baseUrl
+    #casesData
     #updateTime
     constructor() {
-        this.#baseUrl = 'https://covid-api.mmediagroup.fr/v1/'
+        this.baseUrl = 'https://covid-api.mmediagroup.fr/v1/'
     }
-    async getContinentCases() {
-        if(!this.#continentCasesData || (Date.now() > this.#updateTime + 5000)) {
-            const dataResponse = await fetch(this.#baseUrl + 'cases');
-            const data = await dataResponse.json();
-            const continentData = Object.values(data).map(o => o.All).filter(c => !!c.continent && !!c.population); 
-            this.#continentCasesData = _.groupBy(continentData, 'continent');
+    async getCases() {
+        if(!this.#casesData || (Date.now() > this.#updateTime + 36000000)) {
+            const dataResponse = await fetch(this.baseUrl + 'cases');
+            this.#casesData = await dataResponse.json(); 
             this.#updateTime = Date.now();
         }
-        return this.#continentCasesData; 
+        return this.#casesData; 
     }
-    // async getHistory() {
-    //         const dataResponse = await fetch(this.#baseUrl + 'history?status=deaths');
-    //         const data  = await dataResponse.json();
-    //         return data
-    // }
+    async getHistory(country, status) {
+            const dataResponse = await fetch(this.baseUrl + `history?country=${country}&status=${status}`);
+            const historyData  = await dataResponse.json();
+            return historyData;
+    }
+    async getVaccin() {
+            const dataResponse = await fetch(this.baseUrl + 'vaccines');
+            const vaccinData = await dataResponse.json(); 
+        return vaccinData; 
+    }
 }

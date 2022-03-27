@@ -1,0 +1,4 @@
+{
+    "intervals": [30, 60, 90, 120],
+    "countries" : ["France", "Bahamas", "Israel", "China", "Russia", "US", "Italy"]
+}
